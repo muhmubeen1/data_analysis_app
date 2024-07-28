@@ -31,7 +31,7 @@ class _WorldStatesState extends State<WorldStates>
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: const Color.fromARGB(255, 90, 90, 90),
         body: SafeArea(
             child: Column(
           children: [
@@ -52,8 +52,70 @@ class _WorldStatesState extends State<WorldStates>
               chartType: ChartType.ring,
               colorList: colorList,
             ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: MediaQuery.of(context).size.height * 0.06),
+              child: Card(
+                color: const Color.fromARGB(53, 105, 104, 104),
+                child: Column(
+                  children: [
+                    ReuseableRow(title: "Total", value: "400"),
+                    ReuseableRow(title: "Total", value: "400"),
+                    ReuseableRow(title: "Total", value: "400"),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              height: 60,
+              width: 250,
+              decoration: BoxDecoration(
+                  color: Color(0xff1aa260),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Center(
+                child: Text("Track Countries"),
+              ),
+            ),
           ],
         )),
+      ),
+    );
+  }
+}
+
+class ReuseableRow extends StatefulWidget {
+  String title, value;
+  ReuseableRow({Key? key, required this.title, required this.value})
+      : super(key: key);
+  @override
+  State<ReuseableRow> createState() => _ReuseableRowState();
+}
+
+class _ReuseableRowState extends State<ReuseableRow> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, right: 10, left: 10, bottom: 5),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "${widget.title}  ",
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                "${widget.value} ",
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Divider(),
+        ],
       ),
     );
   }
