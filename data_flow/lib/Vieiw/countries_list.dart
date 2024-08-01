@@ -95,6 +95,10 @@ class _CountriesListState extends State<CountriesList> {
                                             (MaterialPageRoute(
                                                 builder: (context) =>
                                                     CountryStats(
+                                                      image: snapshot
+                                                                  .data![index]
+                                                              ['countryInfo']
+                                                          ['flag'],
                                                       name:
                                                           snapshot.data![index]
                                                               ['country'],
@@ -140,27 +144,58 @@ class _CountriesListState extends State<CountriesList> {
                                   } else if (name.toLowerCase().contains(
                                       textEditingController.text
                                           .toLowerCase())) {
-                                    return Column(
-                                      children: [
-                                        ListTile(
-                                            title: Text(
-                                              snapshot.data![index]["country"],
-                                              style: TextStyle(
-                                                  color: Colors.white38),
-                                            ),
-                                            subtitle: Text(
-                                              snapshot.data![index]["cases"]
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  color: Colors.white38),
-                                            ),
-                                            leading: Image(
-                                                height: 50,
-                                                width: 50,
-                                                image: NetworkImage(snapshot
-                                                        .data![index]
-                                                    ["countryInfo"]["flag"]))),
-                                      ],
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            (MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CountryStats(
+                                                      image: snapshot
+                                                                  .data![index]
+                                                              ['countryInfo']
+                                                          ['flag'],
+                                                      name:
+                                                          snapshot.data![index]
+                                                              ['country'],
+                                                      cases:
+                                                          snapshot.data![index]
+                                                              ['cases'],
+                                                      todayCases:
+                                                          snapshot.data![index]
+                                                              ['todayCases'],
+                                                      deaths:
+                                                          snapshot.data![index]
+                                                              ['deaths'],
+                                                      recovered:
+                                                          snapshot.data![index]
+                                                              ['recovered'],
+                                                    ))));
+                                      },
+                                      child: Column(
+                                        children: [
+                                          ListTile(
+                                              title: Text(
+                                                snapshot.data![index]
+                                                    ["country"],
+                                                style: TextStyle(
+                                                    color: Colors.white38),
+                                              ),
+                                              subtitle: Text(
+                                                snapshot.data![index]["cases"]
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Colors.white38),
+                                              ),
+                                              leading: Image(
+                                                  height: 50,
+                                                  width: 50,
+                                                  image: NetworkImage(
+                                                      snapshot.data![index]
+                                                              ["countryInfo"]
+                                                          ["flag"]))),
+                                        ],
+                                      ),
                                     );
                                   } else {
                                     return Container();
